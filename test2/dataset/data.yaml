@@ -1,0 +1,9 @@
+path: ./dataset
+train: images/train
+val: images/val
+names:
+  0: tank
+  1: military_truck
+  2: person
+  3: aircraft
+  4: armored_vehicle
