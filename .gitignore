@@ -2,3 +2,9 @@
 **/__pycache__
 **/*.pyc
 **/*.pt
+**/.idea
+**/*.jpg
+**/*.jpeg
+**/*.png
+**/*.gif
+**/*.mp4
