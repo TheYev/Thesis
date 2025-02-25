@@ -1,0 +1,17 @@
+# path: C:/Users/thedi/OneDrive/Desktop/d/test2/dataset
+# train: images/train
+# val: images/val
+# names:
+#   0: tank
+#   1: military_truck
+#   #2: person
+#   #3: aircraft
+#   #4: armored_vehicle
+names:
+  0: tank
+  1: military_truck
+  2: person
+path: C:/Users/thedi/OneDrive/Desktop/d/finaly/model/train/dataset
+train: images/train
+val: images/val
+test: images/val
