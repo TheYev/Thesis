@@ -1,12 +1,12 @@
-from sqlalchemy import create_enginen
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 
-POSTGRESQL_URL = "postgresql://user:password@localhost:5432/"
+POSTGRESQL_URL = "postgresql://root:secret@localhost:5433/"
 
-engine = create_enginen(POSTGRESQL_URL)
+engine = create_engine(POSTGRESQL_URL)
 
-session = sessionmaker(bind=engine, autocommit=False, autoflush=False)
+SessionLocal = sessionmaker(bind=engine, autocommit=False, autoflush=False)
 
 Base = declarative_base()
