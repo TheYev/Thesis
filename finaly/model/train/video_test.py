@@ -1,9 +1,16 @@
 import cv2
 from ultralytics import YOLO
 import random
+import os
 
-# add rapam model
-async def process_video_with_tracking(input_video_path, show_video=True, save_video=False, output_video_path="output_video.mp4"):
+def video_counter(video_dir_path):
+    count = 0
+    for file in os.listdir(video_dir_path):
+        if file.endswith(".mp4"):
+            count += 1
+    return count
+
+async def process_video_with_tracking(input_video_path, show_video=True, save_video=False):
     model = YOLO("C:/Users/thedi/OneDrive/Desktop/d/runs/detect/train3/weights/best.pt")
     model.fuse()
     cap = cv2.VideoCapture(input_video_path)
@@ -15,11 +22,15 @@ async def process_video_with_tracking(input_video_path, show_video=True, save_vi
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
+    video_dir_path = "C:/Users/thedi/OneDrive/Desktop/d/finaly/out_video"
+    count_video = video_counter(video_dir_path)
+    output_video_path=f"{video_dir_path}/output_video{count_video}.mp4"
+
     if save_video:
         fourcc = cv2.VideoWriter_fourcc(*'mp4v')
         out = cv2.VideoWriter(output_video_path, fourcc, fps, (frame_width, frame_height))
     
-    class_names = model.names  # Отримуємо словник класів
+    class_names = model.names  
 
     while True:
         ret, frame = cap.read()
@@ -31,12 +42,12 @@ async def process_video_with_tracking(input_video_path, show_video=True, save_vi
         if results[0].boxes.id is not None:
             boxes = results[0].boxes.xyxy.cpu().numpy().astype(int)
             ids = results[0].boxes.id.cpu().numpy().astype(int)
-            classes = results[0].boxes.cls.cpu().numpy().astype(int)  # Отримуємо класи об'єктів
-            confidences = results[0].boxes.conf.cpu().numpy()  # Отримуємо ймовірності
+            classes = results[0].boxes.cls.cpu().numpy().astype(int)  
+            confidences = results[0].boxes.conf.cpu().numpy()  
 
             for box, id, cls, conf in zip(boxes, ids, classes, confidences):
-                class_name = class_names.get(cls, "Unknown")  # Отримуємо назву класу
-                confidence = round(conf * 100, 2)  # Перетворюємо на відсотки
+                class_name = class_names.get(cls, "Unknown")  
+                confidence = round(conf * 100, 2)  
                 
                 random.seed(int(id))  
                 color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
@@ -65,6 +76,7 @@ async def process_video_with_tracking(input_video_path, show_video=True, save_vi
     if save_video:
         out.release()
     cv2.destroyAllWindows()
+    return output_video_path
 
 
 # model = YOLO("C:/Users/thedi/OneDrive/Desktop/d/runs/detect/train3/weights/best.pt")

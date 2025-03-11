@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .routers import analyz
+from .routers import analyz, auth
 from .database import Base, engine
 
 
@@ -12,3 +12,4 @@ def read_root():
     return {"Hello": "World"}
 
 app.include_router(analyz.router)
+app.include_router(auth.router)
