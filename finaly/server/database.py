@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 
-POSTGRESQL_URL = "postgresql://root:secret@localhost:5433/"
+POSTGRESQL_URL = "postgresql://root:secret@localhost:5433/finaly"
 
 engine = create_engine(POSTGRESQL_URL)
 

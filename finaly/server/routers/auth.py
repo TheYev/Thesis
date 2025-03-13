@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from passlib.context import CryptContext
 from starlette import status
 from typing import Annotated
@@ -32,9 +32,9 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db)]
 
 class CreateUserRequest(BaseModel):
-    email: str
-    username: str
-    password: str
+    email: str = Field(min_length=1, max_length=100)
+    username: str = Field(min_length=1, max_length=20)
+    password: str = Field(min_length=1, max_length=50)
     
 class Token(BaseModel):
     access_token: str

@@ -8,6 +8,8 @@ class Videos(Base):
     id = Column(Integer, primary_key=True, index=True)
     input_path = Column(String, nullable=False)
     output_path = Column(String, nullable=False)
+    name = Column(String, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id', ondelete="CASCADE"))
 
     owner = relationship("Users", back_populates="videos")
+    
