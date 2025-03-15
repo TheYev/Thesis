@@ -60,8 +60,24 @@ async def get_user_videos(user: user_dependency, db: db_dependency):
     user_video = db.query(Users).filter(Users.id == user.get('id')).first()
     if user_video is None:
         raise HTTPException(status_code=404, detail="User not found")
+    
+    return_data = []
+    for video in user_video.videos:
+        return_data.append({"id": video.id, "name": video.name})
             
-    return user_video.videos
+    return return_data
+
+@router.get("/getVideo/{video_id}", status_code=status.HTTP_200_OK)
+async def get_video_by_id(user: user_dependency, db: db_dependency, video_id: int = Path(gt=0)):
+    if user is None:
+        raise HTTPException(status_code=401, detail="Unauthorized")
+    
+    video = db.query(Videos).filter(Videos.id == video_id)\
+        .filter(Videos.user_id == user.get('id')).first()
+    if video is None:
+        raise HTTPException(status_code=404, detail="Video not found")
+    
+    return {"id": video.id, "name": video.name, "input_path": video.input_path, "output_path": video.output_path}
     
 @router.delete("/deleteVideo/{video_id}", status_code=status.HTTP_200_OK)
 async def delete_video(user: user_dependency, db: db_dependency, video_id: int = Path(gt=0)):
