@@ -2,21 +2,24 @@
 # train: images/train
 # val: images/val
 # names:
-#   0: tanks
-#   1: trucks
-#   #2: person
-#   #3: aircraft
-#   #4: armored_vehicle
-#   #5: Anti_aircraft
-#   #6: light_vehicles
-#   #7: Self_propelled_artillery
-#   #8: artillery
-#   #9: mortar
-#   #10: Reactive_volley_fire_system
+  #0: tanks
+  #1: trucks
+  #2: person
+  #3: aircraft
+  #4: armored_vehicle
+  #5: Anti_aircraft
+  #6: light_vehicles
+  #7: Self_propelled_artillery
+  #10: Reactive_volley_fire_system
 names:
-  0: tank
-  1: military_truck
-  2: person
+  0: Anti_aircraft
+  1: person
+  2: armored_vehicle
+  3: trucks
+  4: light_vehicles
+  5: Reactive_volley_fire_system
+  6: tanks
+  7: Self_propelled_artillery
 path: C:/Users/thedi/OneDrive/Desktop/d/finaly/model/train/dataset
 train: images/train
 val: images/val

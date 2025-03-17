@@ -11,7 +11,7 @@ def video_counter(video_dir_path):
     return count
 
 async def process_video_with_tracking(input_video_path, show_video=True, save_video=False):
-    model = YOLO("C:/Users/thedi/OneDrive/Desktop/d/runs/detect/train3/weights/best.pt")
+    model = YOLO("C:/Users/thedi/OneDrive/Desktop/d/runs/detect/train16/weights/best.pt")
     model.fuse()
     cap = cv2.VideoCapture(input_video_path)
     
