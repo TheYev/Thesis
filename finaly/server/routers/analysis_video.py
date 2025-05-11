@@ -6,7 +6,7 @@ from ..database import SessionLocal
 from .auth import get_current_user
 from ..models.videos import Videos
 from ..models.users import Users
-from finaly.model.train import video_test
+from .video_test import process_video_with_tracking
 from pydantic import BaseModel, Field
 
 
@@ -39,7 +39,7 @@ async def analysis_video(videoRequest: videoRequest, user: user_dependency, db: 
         raise HTTPException(status_code=401, detail="Unauthorized")
         
     #"C:/Users/thedi/OneDrive/Desktop/d/finaly/model/train/test_video.mp4"
-    out_path = await video_test.process_video_with_tracking(videoRequest.input_path, show_video=False, save_video=True)
+    out_path = await process_video_with_tracking(videoRequest.input_path, show_video=False, save_video=True)
         
     create_video_model = Videos(
         input_path=videoRequest.input_path,

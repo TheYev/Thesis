@@ -5,9 +5,9 @@ if __name__ == "__main__":
     model = YOLO('yolov8x.pt')
     model.train(
         data='C:/Users/thedi/OneDrive/Desktop/d/finaly/model/train/dataset/data.yaml', 
-        epochs=20, 
+        epochs=100, 
         imgsz=640, 
-        batch=16, 
+        batch=20, 
         model="yolov8x.pt",
         device='0',
         )
